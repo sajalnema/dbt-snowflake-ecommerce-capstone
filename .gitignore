@@ -1,26 +1,10 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-
-# Virtual Environment
 dbt-env/
 venv/
-
-# dbt
-target/
-logs/
-dbt_packages/
-
 # VS Code
 .vscode/
-
-# OS
-.DS_Store
-Thumbs.db
-
 # Python cache
 .pytest_cache/
-
-# Environment files
 .env
+**/logs/
+**/target/
+**/dbt_packages/
