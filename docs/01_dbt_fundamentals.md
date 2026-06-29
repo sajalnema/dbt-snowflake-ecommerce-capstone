@@ -1,41 +1,66 @@
-# dbt Project Setup
+# DBT Fundamentals
 
-## dbt_project.yml
+## What is dbt?
 
-Purpose:
-Stores project configuration.
+dbt (Data Build Tool) is a transformation framework used in modern ELT pipelines. It enables Analytics Engineers to transform raw data already present in a data warehouse into clean, business-ready datasets using SQL.
 
-Examples:
-- Project name
-- Model paths
-- Materializations
-- Schema configuration
+dbt is **not** a data ingestion tool. It assumes that the data already exists inside the warehouse and focuses only on transformations.
 
 ---
 
-## profiles.yml
+## Why dbt?
 
-Location:
-
-~/.dbt/profiles.yml
-
-Purpose:
-Stores connection information.
-
-Contains:
-- Account
-- Username
-- Password
-- Warehouse
-- Database
-- Schema
-
-Important:
-This file is usually NOT committed to Git because it contains credentials.
+* Version controlled SQL
+* Modular transformations
+* Dependency management
+* Data testing
+* Documentation generation
+* Data lineage
+* Reusable SQL using Jinja and Macros
 
 ---
 
-## dbt debug
+## ELT Architecture
 
-Purpose:
-Checks whether dbt can successfully connect to the data warehouse before running models.
+```
+Source Systems
+        │
+        ▼
+Snowflake (RAW)
+        │
+        ▼
+dbt
+        │
+        ▼
+STAGING
+        │
+        ▼
+TRANSFORM
+        │
+        ▼
+MART
+```
+
+---
+
+## dbt Seed
+
+Seeds are small static CSV files stored inside the `seeds/` directory.
+
+Running:
+
+```
+dbt seed
+```
+
+loads the CSV files into Snowflake as tables.
+
+Seeds are intended for:
+
+* Reference data
+* Lookup tables
+* Small static datasets
+* Demo projects
+* Development environments
+
+Seeds should **not** be used for large production datasets.
