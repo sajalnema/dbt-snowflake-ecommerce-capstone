@@ -1,0 +1,103 @@
+[0m15:19:07.021927 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x785ae3621af0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x785ae5a74c50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x785ae342a4b0>]}
+
+
+============================== 15:19:07.026236 | e7882566-6375-4d1c-b59b-012235eab9fe ==============================
+[0m15:19:07.026236 [info ] [MainThread]: Running with dbt=1.11.11
+[0m15:19:07.026990 [debug] [MainThread]: running dbt with arguments {'empty': 'None', 'write_json': 'True', 'invocation_command': 'dbt init ecommerce_capstone', 'cache_selected_only': 'False', 'no_print': 'None', 'version_check': 'True', 'fail_fast': 'False', 'introspect': 'True', 'use_colors': 'True', 'static_parser': 'True', 'target_path': 'None', 'quiet': 'False', 'warn_error': 'None', 'log_cache_events': 'False', 'profiles_dir': '/home/nucleusteq/.dbt', 'indirect_selection': 'eager', 'log_format': 'default', 'use_experimental_parser': 'False', 'printer_width': '80', 'partial_parse': 'True', 'log_path': 'logs', 'debug': 'False', 'send_anonymous_usage_stats': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])'}
+[0m15:19:07.037185 [debug] [MainThread]: Starter project path: /home/nucleusteq/Salesforce_Capstone/dbt-env/lib/python3.12/site-packages/dbt/include/starter_project
+[0m15:19:07.039994 [info ] [MainThread]: 
+Your new dbt project "ecommerce_capstone" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m15:19:07.040654 [info ] [MainThread]: Setting up your profile.
+[0m15:19:11.481156 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m15:19:11.481556 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m15:19:11.481820 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m15:20:45.431422 [info ] [MainThread]: Profile ecommerce_capstone written to /home/nucleusteq/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m15:20:45.433702 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 98.456375, "process_in_blocks": "0", "process_kernel_time": 0.091977, "process_mem_max_rss": "129584", "process_out_blocks": "80", "process_user_time": 1.090839}
+[0m15:20:45.434566 [debug] [MainThread]: Command `dbt init` succeeded at 15:20:45.434441 after 98.46 seconds
+[0m15:20:45.435001 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x785ae2e454c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x785ae1ead880>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x785ae1811700>]}
+[0m15:20:45.435511 [debug] [MainThread]: Flushing usage events
+[0m15:20:46.736515 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m15:21:08.308720 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7455120a6960>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7455128421e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7455127e59d0>]}
+
+
+============================== 15:21:08.311929 | ba79cb3a-79cc-4523-b48d-271643993825 ==============================
+[0m15:21:08.311929 [info ] [MainThread]: Running with dbt=1.11.11
+[0m15:21:08.312582 [debug] [MainThread]: running dbt with arguments {'use_colors': 'True', 'printer_width': '80', 'use_experimental_parser': 'False', 'invocation_command': 'dbt debug', 'debug': 'False', 'introspect': 'True', 'write_json': 'True', 'version_check': 'True', 'partial_parse': 'True', 'log_format': 'default', 'no_print': 'None', 'target_path': 'None', 'log_cache_events': 'False', 'send_anonymous_usage_stats': 'True', 'static_parser': 'True', 'warn_error': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'quiet': 'False', 'cache_selected_only': 'False', 'profiles_dir': '/home/nucleusteq/.dbt', 'fail_fast': 'False', 'log_path': 'logs', 'indirect_selection': 'eager', 'empty': 'None'}
+[0m15:21:08.319265 [info ] [MainThread]: dbt version: 1.11.11
+[0m15:21:08.319632 [info ] [MainThread]: python version: 3.12.3
+[0m15:21:08.319875 [info ] [MainThread]: python path: /home/nucleusteq/Salesforce_Capstone/dbt-env/bin/python
+[0m15:21:08.320125 [info ] [MainThread]: os info: Linux-6.17.0-35-generic-x86_64-with-glibc2.39
+[0m15:21:08.449803 [debug] [MainThread]: Snowflake adapter: Setting snowflake.connector to ERROR (file logging only)
+[0m15:21:08.450194 [debug] [MainThread]: Snowflake adapter: Setting botocore to ERROR (file logging only)
+[0m15:21:08.450487 [debug] [MainThread]: Snowflake adapter: Setting boto3 to ERROR (file logging only)
+[0m15:21:08.533661 [info ] [MainThread]: Using profiles dir at /home/nucleusteq/.dbt
+[0m15:21:08.534042 [info ] [MainThread]: Using profiles.yml file at /home/nucleusteq/.dbt/profiles.yml
+[0m15:21:08.534307 [info ] [MainThread]: Using dbt_project.yml file at /home/nucleusteq/Salesforce_Capstone/ecommerce_capstone/dbt_project.yml
+[0m15:21:08.534650 [info ] [MainThread]: adapter type: snowflake
+[0m15:21:08.534874 [info ] [MainThread]: adapter version: 1.11.6
+[0m15:21:08.535112 [info ] [MainThread]: Configuration:
+[0m15:21:08.535323 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m15:21:08.535506 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m15:21:08.535689 [info ] [MainThread]: Required dependencies:
+[0m15:21:08.535908 [debug] [MainThread]: Executing "git --help"
+[0m15:21:08.537644 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--config-env=<name>=<envvar>] <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m15:21:08.538157 [debug] [MainThread]: STDERR: "b''"
+[0m15:21:08.538553 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m15:21:08.538940 [info ] [MainThread]: Connection:
+[0m15:21:08.539367 [info ] [MainThread]:   account: ltbfimi-pg63282
+[0m15:21:08.539785 [info ] [MainThread]:   user: SAJAL
+[0m15:21:08.540197 [info ] [MainThread]:   database: ECOMMERCE_DBT
+[0m15:21:08.540618 [info ] [MainThread]:   warehouse: COMPUTE_WH
+[0m15:21:08.541000 [info ] [MainThread]:   role: ACCOUNTADMIN
+[0m15:21:08.541403 [info ] [MainThread]:   schema: STAGING
+[0m15:21:08.541783 [info ] [MainThread]:   authenticator: None
+[0m15:21:08.542156 [info ] [MainThread]:   oauth_client_id: None
+[0m15:21:08.542534 [info ] [MainThread]:   query_tag: None
+[0m15:21:08.542909 [info ] [MainThread]:   client_session_keep_alive: False
+[0m15:21:08.543304 [info ] [MainThread]:   host: None
+[0m15:21:08.543696 [info ] [MainThread]:   port: None
+[0m15:21:08.544078 [info ] [MainThread]:   proxy_host: None
+[0m15:21:08.544449 [info ] [MainThread]:   proxy_port: None
+[0m15:21:08.544811 [info ] [MainThread]:   protocol: None
+[0m15:21:08.545156 [info ] [MainThread]:   connect_retries: 1
+[0m15:21:08.545543 [info ] [MainThread]:   connect_timeout: None
+[0m15:21:08.545906 [info ] [MainThread]:   retry_on_database_errors: False
+[0m15:21:08.546286 [info ] [MainThread]:   retry_all: False
+[0m15:21:08.546648 [info ] [MainThread]:   insecure_mode: False
+[0m15:21:08.547018 [info ] [MainThread]:   reuse_connections: True
+[0m15:21:08.547405 [info ] [MainThread]:   s3_stage_vpce_dns_name: None
+[0m15:21:08.547770 [info ] [MainThread]:   platform_detection_timeout_seconds: 0.0
+[0m15:21:08.548314 [info ] [MainThread]: Registered adapter: snowflake=1.11.6
+[0m15:21:08.605154 [debug] [MainThread]: Acquiring new snowflake connection 'debug'
+[0m15:21:08.618171 [debug] [MainThread]: Using snowflake connection "debug"
+[0m15:21:08.618540 [debug] [MainThread]: On debug: select 1 as id
+[0m15:21:08.618772 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m15:21:09.684170 [debug] [MainThread]: SQL status: SUCCESS 1 in 1.065 seconds
+[0m15:21:09.686424 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m15:21:09.687270 [info ] [MainThread]: [31m1 check failed:[0m
+[0m15:21:09.687948 [info ] [MainThread]: Project loading failed for the following reason:
+ project path </home/nucleusteq/Salesforce_Capstone/ecommerce_capstone/dbt_project.yml> not found
+
+[0m15:21:09.689469 [debug] [MainThread]: Resource report: {"command_name": "debug", "command_success": false, "command_wall_clock_time": 1.4202775, "process_in_blocks": "328", "process_kernel_time": 0.124964, "process_mem_max_rss": "144412", "process_out_blocks": "32", "process_user_time": 1.218649}
+[0m15:21:09.690251 [debug] [MainThread]: Command `dbt debug` failed at 15:21:09.690112 after 1.42 seconds
+[0m15:21:09.690774 [debug] [MainThread]: Connection 'debug' was left open.
+[0m15:21:09.691204 [debug] [MainThread]: On debug: Close
+[0m15:21:09.920947 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7455126cc7d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x745510088800>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7455117dde80>]}
+[0m15:21:09.921896 [debug] [MainThread]: Flushing usage events
+[0m15:21:10.972237 [debug] [MainThread]: An error was encountered while trying to flush usage events
