@@ -54,3 +54,30 @@ These files are loaded into Snowflake using:
 ```
 dbt seed
 ```
+
+
+## Layer Responsibilities
+
+### RAW
+Stores the source data exactly as received without applying transformations.
+
+### STAGING
+Standardizes raw data by renaming columns, normalizing values, and applying lightweight cleaning while preserving all business information.
+
+### TRANSFORM
+Applies business logic such as aggregations, metrics, and reusable calculations.
+
+### MART
+Provides analytics-ready fact and dimension tables for BI tools and reporting.
+
+## Staging Layer Principles
+
+The staging layer is responsible for:
+
+- Renaming columns
+- Standardizing values
+- Cleaning whitespace
+- Normalizing text
+- Preserving business information
+
+The staging layer should avoid business-specific calculations and should not remove useful information from the source data.

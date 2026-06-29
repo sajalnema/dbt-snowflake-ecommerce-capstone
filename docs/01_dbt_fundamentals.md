@@ -64,3 +64,29 @@ Seeds are intended for:
 * Development environments
 
 Seeds should **not** be used for large production datasets.
+
+## Materializations
+
+Materialization defines how dbt stores the result of a SQL model inside the data warehouse.
+
+### View
+- Stores only the SQL definition.
+- Data is not physically stored.
+- Always reflects the latest underlying data.
+- Suitable for lightweight staging models.
+
+### Table
+- Stores the query result physically.
+- Faster to query.
+- Requires rebuilding when source data changes.
+- Suitable for business-ready models and marts.
+
+## ref()
+
+The `ref()` function is used to reference another dbt model or seed.
+
+Benefits:
+- Builds dependencies between models
+- Avoids hardcoded object names
+- Enables lineage generation
+- Determines model execution order
