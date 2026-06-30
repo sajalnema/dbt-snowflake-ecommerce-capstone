@@ -7,7 +7,7 @@ SELECT
             '(st|nd|rd|th)',
             ''
         ),
-        'DD MONTH YYYY HH24:MI:SS'
+        'DD MMMM YYYY HH24:MI:SS'
     ) AS order_timestamp,
 
     CASE
