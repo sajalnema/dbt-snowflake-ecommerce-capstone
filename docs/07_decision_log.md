@@ -16,3 +16,7 @@ This document captures the key engineering decisions made throughout the project
 | Materialize staging models as Views | Staging transformations are lightweight and should always reflect the latest raw data without duplicating storage. |
 | Use `ref()` instead of hardcoded table names | Enables dependency management, automatic lineage generation, and environment-independent model references. |
 | Override dbt schema generation to create dedicated warehouse schemas | Produces a clean warehouse architecture (`RAW`, `STAGING`, `TRANSFORM`, `MART`) instead of generated schemas such as `STAGING_RAW`. |
+| Preserve timestamps as TIMESTAMP instead of DATE  | Time information may be useful for future analytics. Business-level date extraction can happen in downstream models. |
+| Use `INITCAP()` even though current data is clean | Makes the pipeline resilient to inconsistent future source data.                                                     |
+| Use `REGEXP_REPLACE()` before parsing timestamps  | Removes ordinal suffixes (`st`, `nd`, `rd`, `th`) so the timestamp can be parsed reliably.                           |
+| Filter records with null business keys            | Invalid customer references and missing emails reduce downstream data quality.                                       |

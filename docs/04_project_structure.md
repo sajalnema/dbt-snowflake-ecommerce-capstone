@@ -81,3 +81,21 @@ The staging layer is responsible for:
 - Preserving business information
 
 The staging layer should avoid business-specific calculations and should not remove useful information from the source data.
+## Responsibilities of the Staging Layer
+
+Purpose:
+
+- Standardize data
+- Rename columns
+- Normalize text
+- Parse datatypes
+- Remove invalid records
+
+Avoid:
+
+- Business calculations
+- Aggregations
+- KPIs
+- Metrics
+
+These belong to the Transform layer.

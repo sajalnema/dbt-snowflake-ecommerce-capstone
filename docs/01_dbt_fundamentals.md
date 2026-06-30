@@ -90,3 +90,38 @@ Benefits:
 - Avoids hardcoded object names
 - Enables lineage generation
 - Determines model execution order
+
+## REGEXP_REPLACE()
+
+Used to clean strings using Regular Expressions.
+
+Syntax:
+
+REGEXP_REPLACE(
+    subject,
+    pattern,
+    replacement,
+    position,
+    occurrence,
+    parameters
+)
+
+Example:
+
+REGEXP_REPLACE(
+    order_timestamp,
+    '(st|nd|rd|th)',
+    '',
+    1,
+    0,
+    'i'
+)
+
+Explanation:
+
+- subject → string to modify
+- pattern → regex to match
+- replacement → replacement text
+- position → starting character position
+- occurrence → 0 means replace all matches
+- parameters → 'i' enables case-insensitive matching
