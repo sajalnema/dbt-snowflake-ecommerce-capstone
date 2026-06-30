@@ -20,3 +20,5 @@ This document captures the key engineering decisions made throughout the project
 | Use `INITCAP()` even though current data is clean | Makes the pipeline resilient to inconsistent future source data.                                                     |
 | Use `REGEXP_REPLACE()` before parsing timestamps  | Removes ordinal suffixes (`st`, `nd`, `rd`, `th`) so the timestamp can be parsed reliably.                           |
 | Filter records with null business keys            | Invalid customer references and missing emails reduce downstream data quality.                                       |
+| Store customer metrics in an intermediate model        | Allows multiple downstream marts to reuse the same business calculations without duplicating SQL. |
+| Aggregate using `GROUP BY` instead of window functions | The required grain is one row per customer, making aggregate functions the correct choice.        |

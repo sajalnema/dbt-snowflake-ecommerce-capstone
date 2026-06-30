@@ -99,3 +99,17 @@ Avoid:
 - Metrics
 
 These belong to the Transform layer.
+
+## Transform Layer Responsibilities
+
+The transform layer converts cleaned operational data into reusable business metrics.
+
+Typical operations:
+- Aggregations
+- Business KPIs
+- Reusable calculations
+- Joins between staging models
+
+Avoid:
+- Final reporting tables
+- Dashboard-specific models

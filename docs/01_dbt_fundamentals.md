@@ -125,3 +125,15 @@ Explanation:
 - position → starting character position
 - occurrence → 0 means replace all matches
 - parameters → 'i' enables case-insensitive matching
+
+## Intermediate Models
+
+Purpose:
+- Store reusable business logic.
+- Avoid duplicating SQL.
+- Serve as a bridge between staging and marts.
+
+Examples:
+- Customer order summary
+- Sales aggregations
+- Product performance metrics
