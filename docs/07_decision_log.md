@@ -35,3 +35,7 @@ This document captures the key engineering decisions made throughout the project
 | Configure `on_schema_change='sync_all_columns'` | Allows incremental models to adapt to schema evolution in supported environments. |
 | Do not implement an `is_incremental()` source filter | The source dataset lacks a reliable change timestamp. Filtering source rows could miss valid business metric updates. |
 | Separate business columns from technical metadata using a CTE | Improves readability and avoids duplicating business logic. |
+| Keep `schema.yml` close to each modeling layer       | Improves maintainability and keeps documentation near the models it describes. |
+| Validate primary keys using `unique` and `not_null`  | Ensures entity integrity across the warehouse.                                 |
+| Validate foreign keys using `relationships`          | Preserves referential integrity between Fact and Dimension models.             |
+| Test cleaned staging models instead of raw seed data | Business rules should validate transformed datasets consumed downstream.       |

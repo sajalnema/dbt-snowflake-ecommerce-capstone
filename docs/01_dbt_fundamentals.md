@@ -335,3 +335,70 @@ The provided dataset does not contain a source-side modification timestamp.
 Therefore, an additional `is_incremental()` filter would risk missing valid business updates (for example, changes to Customer Lifetime Value).
 
 The project intentionally demonstrates Incremental Materialization without source filtering.
+
+## Data Quality Testing
+
+dbt provides Generic Tests that validate data quality after models are built.
+
+These tests are implemented as SQL queries. A test passes when the generated query returns **zero rows**.
+
+### Tests Used
+
+#### unique
+
+Ensures duplicate business keys do not exist.
+
+Example:
+
+```yaml
+tests:
+  - unique
+```
+
+---
+
+#### not_null
+
+Ensures mandatory fields always contain a value.
+
+Example:
+
+```yaml
+tests:
+  - not_null
+```
+
+---
+
+#### relationships
+
+Ensures referential integrity between related models.
+
+Example:
+
+```yaml
+tests:
+  - relationships:
+      to: ref('stg_customers')
+      field: customer_id
+```
+
+---
+
+### Execution Flow
+
+dbt build
+
+↓
+
+Seeds
+
+↓
+
+Models
+
+↓
+
+Tests
+
+Therefore, tests always execute after the corresponding models have been created.

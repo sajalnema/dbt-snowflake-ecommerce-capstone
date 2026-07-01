@@ -145,3 +145,26 @@ The customer dimension was converted from a standard table into an Incremental M
 ### Purpose
 
 Make the mart suitable for production-scale incremental processing while supporting auditing and change detection.
+## Data Quality Layer
+
+Model Tests
+
+staging/schema.yml
+
+- customer_id → unique, not_null
+- email → not_null
+- order_id → unique, not_null
+- customer_id → relationships
+
+transform/schema.yml
+
+- customer_id → unique, not_null
+
+marts/schema.yml
+
+dim_customers
+- customer_id → unique, not_null
+
+fact_orders
+- order_id → unique, not_null
+- customer_id → relationships
