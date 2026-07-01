@@ -137,3 +137,121 @@ Examples:
 - Customer order summary
 - Sales aggregations
 - Product performance metrics
+## Incremental Materialization
+
+Purpose:
+Avoid rebuilding the complete table on every execution.
+
+Configuration:
+
+{{ config(
+    materialized='incremental',
+    unique_key='customer_id'
+) }}
+
+Key Points:
+- First run creates the table.
+- Later runs merge new or changed records.
+- `unique_key` identifies existing rows that should be updated.
+
+Current Project:
+
+```jinja
+{{ config(
+    materialized='incremental',
+    unique_key='customer_id'
+) }}
+
+Key Learnings:
+
+First execution behaves like a full table creation.
+Later executions perform merge operations.
+unique_key identifies existing records for updates.
+
+### Schema Changes in Incremental Models
+
+When new columns are added to an incremental model, the existing target table may not automatically include them.
+
+During development, use:
+
+dbt run --full-refresh
+
+This forces dbt to recreate the table with the updated schema.
+
+In production, schema changes should be planned carefully because incremental models prioritize updating data rather than rebuilding the entire table.
+
+## Production Enhancements
+
+### Incremental Materialization
+
+```jinja
+{{ config(
+    materialized='incremental',
+    unique_key='customer_id'
+) }}
+```
+
+Purpose:
+- Avoid rebuilding the complete table.
+- Merge new or modified records using the configured unique key.
+
+---
+
+### Audit Metadata
+
+`updated_at`
+
+Stores the timestamp when the customer profile was generated.
+
+Uses:
+
+- Data freshness
+- Pipeline auditing
+- Incremental processing
+
+---
+
+### Active Customer
+
+Business Definition:
+
+A customer having at least one completed order.
+
+Implementation:
+
+```sql
+CASE
+WHEN total_orders_placed > 0
+THEN TRUE
+ELSE FALSE
+END
+```
+
+---
+
+### Row Hash
+
+Purpose:
+
+Generate a deterministic fingerprint of the business columns.
+
+Benefits:
+
+- Detect row-level changes
+- Useful for Incremental Models
+- Common in CDC pipelines
+- Similar concept to ETag comparison used in metadata ingestion
+
+---
+
+### Incremental Model Development Tip
+
+When adding new columns to an Incremental Model, use:
+
+```bash
+dbt run --full-refresh
+```
+
+Reason:
+
+Existing Incremental tables are merged rather than recreated, so schema changes require a full rebuild.

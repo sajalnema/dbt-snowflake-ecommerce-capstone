@@ -25,3 +25,10 @@ This document captures the key engineering decisions made throughout the project
 | Build separate Fact and Dimension tables     | Follows Star Schema design and separates transactional data from descriptive customer information. |
 | Use LEFT JOIN while building `dim_customers` | Ensures customers without orders still appear in the final dimension.                              |
 | Use `COALESCE()` for numeric metrics         | Reports should display `0` instead of `NULL` for customers with no orders.                         |
+| Materialize `dim_customers` as an Incremental model | Customer profiles are expected to grow over time. Incremental processing avoids rebuilding the complete table on every run and scales better for large datasets. |
+| Configure `dim_customers` as an Incremental Model | Customer profile tables grow over time. Incremental materialization scales better than rebuilding the complete table on every execution. |
+| Use `customer_id` as `unique_key`                 | Primary business identifier used for merge operations.                                                                                   |
+| Use `dbt run --full-refresh` after modifying the schema of an Incremental Model | Incremental models merge into existing tables and do not automatically recreate table structures when new columns are introduced. |                   |
+| Introduce `row_hash`                              | Detect row-level changes efficiently using a deterministic fingerprint.     |
+| Add `updated_at`                                  | Support auditing and data freshness tracking.                               |
+| Add `active_customer`                             | Expose a commonly used business KPI directly in the mart.                   |

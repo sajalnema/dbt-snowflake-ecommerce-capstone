@@ -49,3 +49,9 @@ dbt clean
 ```
 
 Removes generated directories such as `target/` and `dbt_packages`, allowing them to be recreated on the next run.
+
+# Build models + tests + seeds
+dbt build
+
+# Force rebuild Incremental Models
+dbt run --full-refresh

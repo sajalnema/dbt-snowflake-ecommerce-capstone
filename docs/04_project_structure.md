@@ -130,3 +130,25 @@ fact_orders
 dim_customers
 - One row per customer
 - Combines customer attributes with aggregated order metrics
+
+```markdown
+### Production Enhancement
+
+The customer dimension was converted from a standard table into an Incremental Model.
+
+Benefits:
+
+- Faster execution for large datasets
+- Avoids rebuilding the complete table
+- Supports merge-based updates using `customer_id`
+
+Production Enhancements
+
+dim_customers
+. Incremental Materialization
+. Active Customer Flag
+. Audit Timestamp
+. Row Hash
+
+Purpose:
+Make the mart suitable for production-scale incremental processing while supporting auditing and change detection.
