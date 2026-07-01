@@ -113,3 +113,20 @@ Typical operations:
 Avoid:
 - Final reporting tables
 - Dashboard-specific models
+## Mart Layer Responsibilities
+
+Purpose:
+- Expose business-ready datasets
+- Combine reusable business metrics
+- Build reporting-friendly tables
+- Power BI / Tableau ready
+
+Models:
+
+fact_orders
+- One row per order
+- Uses cleaned staging orders
+
+dim_customers
+- One row per customer
+- Combines customer attributes with aggregated order metrics

@@ -22,3 +22,6 @@ This document captures the key engineering decisions made throughout the project
 | Filter records with null business keys            | Invalid customer references and missing emails reduce downstream data quality.                                       |
 | Store customer metrics in an intermediate model        | Allows multiple downstream marts to reuse the same business calculations without duplicating SQL. |
 | Aggregate using `GROUP BY` instead of window functions | The required grain is one row per customer, making aggregate functions the correct choice.        |
+| Build separate Fact and Dimension tables     | Follows Star Schema design and separates transactional data from descriptive customer information. |
+| Use LEFT JOIN while building `dim_customers` | Ensures customers without orders still appear in the final dimension.                              |
+| Use `COALESCE()` for numeric metrics         | Reports should display `0` instead of `NULL` for customers with no orders.                         |
