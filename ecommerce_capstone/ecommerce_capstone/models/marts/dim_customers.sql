@@ -1,3 +1,7 @@
+{{config(
+    materialized='incremental',
+    unique_key='customer_id',
+)}}
 SELECT
     c.customer_id,
     c.first_name,
