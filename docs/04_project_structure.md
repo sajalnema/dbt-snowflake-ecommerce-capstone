@@ -168,3 +168,19 @@ dim_customers
 fact_orders
 - order_id → unique, not_null
 - customer_id → relationships
+## Snapshot Layer
+
+Purpose
+
+Maintain historical versions of customer profiles.
+
+Flow
+
+dim_customers
+        │
+        ▼
+dim_customers_snapshot
+
+Current-state data remains in the mart.
+
+Historical versions are preserved in the snapshot.

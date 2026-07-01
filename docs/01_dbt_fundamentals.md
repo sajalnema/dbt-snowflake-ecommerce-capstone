@@ -402,3 +402,54 @@ Models
 Tests
 
 Therefore, tests always execute after the corresponding models have been created.
+## Snapshots (Slowly Changing Dimensions)
+
+Snapshots preserve historical versions of records instead of overwriting them.
+
+Our mart (`dim_customers`) always stores the latest customer profile.
+
+The snapshot stores every historical version whenever business attributes change.
+
+### Snapshot Configuration
+
+```jinja
+{% snapshot dim_customers_snapshot %}
+
+{{
+    config(
+        target_schema='MART',
+        unique_key='customer_id',
+        strategy='check',
+        check_cols=['row_hash']
+    )
+}}
+
+SELECT *
+FROM {{ ref('dim_customers') }}
+
+{% endsnapshot %}
+```
+
+### Snapshot Strategy
+
+Strategy Used:
+- `check`
+
+Reason:
+
+The source dataset does not contain a reliable modification timestamp (`updated_at` or `last_modified_at`).
+
+Instead, snapshots compare the deterministic `row_hash` generated in the mart.
+
+Whenever the hash changes, dbt stores a new historical version.
+
+### Snapshot Metadata
+
+dbt automatically creates:
+
+- `dbt_valid_from`
+- `dbt_valid_to`
+- `dbt_updated_at`
+- `dbt_scd_id`
+
+These columns track when each historical version became active and when it was superseded.

@@ -39,3 +39,7 @@ This document captures the key engineering decisions made throughout the project
 | Validate primary keys using `unique` and `not_null`  | Ensures entity integrity across the warehouse.                                 |
 | Validate foreign keys using `relationships`          | Preserves referential integrity between Fact and Dimension models.             |
 | Test cleaned staging models instead of raw seed data | Business rules should validate transformed datasets consumed downstream.       |
+| Use dbt Snapshots for historical tracking | Preserve previous customer profile versions instead of overwriting them.                               |
+| Use `strategy='check'`                    | Source data does not provide a reliable modification timestamp.                                        |
+| Monitor only `row_hash`                   | Simplifies change detection while automatically covering all business attributes included in the hash. |
+| Snapshot the mart instead of staging      | Historical tracking is required for business-ready customer profiles rather than raw operational data. |
