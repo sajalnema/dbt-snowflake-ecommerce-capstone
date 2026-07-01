@@ -2,21 +2,21 @@
 
 ## Repository Structure
 
-```
+```text
 datasets/
 docs/
 ecommerce_capstone/
 ```
 
-* **datasets/** → Original source CSV files.
-* **docs/** → Engineering documentation and interview notes.
-* **ecommerce_capstone/** → Actual dbt project.
+- **datasets/** → Original source CSV files.
+- **docs/** → Engineering documentation and interview notes.
+- **ecommerce_capstone/** → Actual dbt project.
 
 ---
 
-## dbt Project Structure
+# dbt Project Structure
 
-```
+```text
 dbt_project.yml
 models/
 seeds/
@@ -26,72 +26,54 @@ snapshots/
 analyses/
 ```
 
-### dbt_project.yml
+## `dbt_project.yml`
 
 Acts as the central configuration file for the dbt project.
 
-Responsibilities:
+### Responsibilities
 
-* Project configuration
-* Model locations
-* Seed locations
-* Test locations
-* Materialization configuration
+- Project configuration
+- Model locations
+- Seed locations
+- Test locations
+- Materialization configuration
 
 ---
 
-## Seeds
+# Seeds
 
 The `seeds/` directory contains static CSV files consumed by dbt.
 
-Current project:
+### Current Project
 
-* raw_customers.csv
-* raw_orders.csv
+- `raw_customers.csv`
+- `raw_orders.csv`
 
 These files are loaded into Snowflake using:
 
-```
+```bash
 dbt seed
 ```
 
+---
 
-## Layer Responsibilities
+# Layer Responsibilities
 
-### RAW
+## RAW
+
 Stores the source data exactly as received without applying transformations.
 
-### STAGING
-Standardizes raw data by renaming columns, normalizing values, and applying lightweight cleaning while preserving all business information.
+## STAGING
 
-### TRANSFORM
-Applies business logic such as aggregations, metrics, and reusable calculations.
-
-### MART
-Provides analytics-ready fact and dimension tables for BI tools and reporting.
-
-## Staging Layer Principles
-
-The staging layer is responsible for:
+Standardizes raw data by:
 
 - Renaming columns
-- Standardizing values
+- Normalizing values
 - Cleaning whitespace
-- Normalizing text
-- Preserving business information
+- Parsing datatypes
+- Preserving all business information
 
-The staging layer should avoid business-specific calculations and should not remove useful information from the source data.
-## Responsibilities of the Staging Layer
-
-Purpose:
-
-- Standardize data
-- Rename columns
-- Normalize text
-- Parse datatypes
-- Remove invalid records
-
-Avoid:
+The staging layer should **avoid**:
 
 - Business calculations
 - Aggregations
@@ -100,55 +82,66 @@ Avoid:
 
 These belong to the Transform layer.
 
-## Transform Layer Responsibilities
+## TRANSFORM
 
-The transform layer converts cleaned operational data into reusable business metrics.
+The Transform layer converts cleaned operational data into reusable business metrics.
 
 Typical operations:
+
 - Aggregations
 - Business KPIs
 - Reusable calculations
 - Joins between staging models
 
 Avoid:
+
 - Final reporting tables
 - Dashboard-specific models
-## Mart Layer Responsibilities
+
+## MART
+
+Provides analytics-ready fact and dimension tables for BI tools and reporting.
 
 Purpose:
+
 - Expose business-ready datasets
 - Combine reusable business metrics
 - Build reporting-friendly tables
 - Power BI / Tableau ready
 
-Models:
+### Models
 
-fact_orders
+#### `fact_orders`
+
 - One row per order
 - Uses cleaned staging orders
 
-dim_customers
+#### `dim_customers`
+
 - One row per customer
 - Combines customer attributes with aggregated order metrics
 
-```markdown
-### Production Enhancement
+---
+
+# Production Enhancement
 
 The customer dimension was converted from a standard table into an Incremental Model.
 
-Benefits:
+## Benefits
 
 - Faster execution for large datasets
 - Avoids rebuilding the complete table
 - Supports merge-based updates using `customer_id`
 
-Production Enhancements
+## Production Enhancements
 
-dim_customers
-. Incremental Materialization
-. Active Customer Flag
-. Audit Timestamp
-. Row Hash
+### `dim_customers`
 
-Purpose:
+- Incremental Materialization
+- Active Customer Flag
+- Audit Timestamp
+- Row Hash
+
+### Purpose
+
 Make the mart suitable for production-scale incremental processing while supporting auditing and change detection.

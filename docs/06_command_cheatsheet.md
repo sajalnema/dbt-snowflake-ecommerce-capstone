@@ -2,6 +2,8 @@
 
 A quick reference for the most commonly used dbt commands during development.
 
+---
+
 ## Validate Connection
 
 ```bash
@@ -42,6 +44,37 @@ Builds all models defined in the project.
 
 ---
 
+## Build Project
+
+```bash
+dbt build
+```
+
+Runs the complete dbt workflow by executing:
+
+- Seeds (when applicable)
+- Models
+- Tests
+- Snapshots (if present)
+
+This is commonly used in CI/CD pipelines and for validating the entire project.
+
+---
+
+## Force Rebuild Incremental Models
+
+```bash
+dbt run --full-refresh
+```
+
+Drops and recreates Incremental Models instead of performing incremental updates. This is useful when:
+
+- Schema changes have been made
+- New columns have been added
+- A complete rebuild of the model is required
+
+---
+
 ## Clean Project
 
 ```bash
@@ -49,9 +82,3 @@ dbt clean
 ```
 
 Removes generated directories such as `target/` and `dbt_packages`, allowing them to be recreated on the next run.
-
-# Build models + tests + seeds
-dbt build
-
-# Force rebuild Incremental Models
-dbt run --full-refresh

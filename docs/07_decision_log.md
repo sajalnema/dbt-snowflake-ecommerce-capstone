@@ -16,19 +16,22 @@ This document captures the key engineering decisions made throughout the project
 | Materialize staging models as Views | Staging transformations are lightweight and should always reflect the latest raw data without duplicating storage. |
 | Use `ref()` instead of hardcoded table names | Enables dependency management, automatic lineage generation, and environment-independent model references. |
 | Override dbt schema generation to create dedicated warehouse schemas | Produces a clean warehouse architecture (`RAW`, `STAGING`, `TRANSFORM`, `MART`) instead of generated schemas such as `STAGING_RAW`. |
-| Preserve timestamps as TIMESTAMP instead of DATE  | Time information may be useful for future analytics. Business-level date extraction can happen in downstream models. |
-| Use `INITCAP()` even though current data is clean | Makes the pipeline resilient to inconsistent future source data.                                                     |
-| Use `REGEXP_REPLACE()` before parsing timestamps  | Removes ordinal suffixes (`st`, `nd`, `rd`, `th`) so the timestamp can be parsed reliably.                           |
-| Filter records with null business keys            | Invalid customer references and missing emails reduce downstream data quality.                                       |
-| Store customer metrics in an intermediate model        | Allows multiple downstream marts to reuse the same business calculations without duplicating SQL. |
-| Aggregate using `GROUP BY` instead of window functions | The required grain is one row per customer, making aggregate functions the correct choice.        |
-| Build separate Fact and Dimension tables     | Follows Star Schema design and separates transactional data from descriptive customer information. |
-| Use LEFT JOIN while building `dim_customers` | Ensures customers without orders still appear in the final dimension.                              |
-| Use `COALESCE()` for numeric metrics         | Reports should display `0` instead of `NULL` for customers with no orders.                         |
-| Materialize `dim_customers` as an Incremental model | Customer profiles are expected to grow over time. Incremental processing avoids rebuilding the complete table on every run and scales better for large datasets. |
-| Configure `dim_customers` as an Incremental Model | Customer profile tables grow over time. Incremental materialization scales better than rebuilding the complete table on every execution. |
-| Use `customer_id` as `unique_key`                 | Primary business identifier used for merge operations.                                                                                   |
-| Use `dbt run --full-refresh` after modifying the schema of an Incremental Model | Incremental models merge into existing tables and do not automatically recreate table structures when new columns are introduced. |                   |
-| Introduce `row_hash`                              | Detect row-level changes efficiently using a deterministic fingerprint.     |
-| Add `updated_at`                                  | Support auditing and data freshness tracking.                               |
-| Add `active_customer`                             | Expose a commonly used business KPI directly in the mart.                   |
+| Preserve timestamps as `TIMESTAMP` instead of `DATE` | Time information may be useful for future analytics. Business-level date extraction can happen in downstream models. |
+| Use `INITCAP()` even though current data is clean | Makes the pipeline resilient to inconsistent future source data. |
+| Use `REGEXP_REPLACE()` before parsing timestamps | Removes ordinal suffixes (`st`, `nd`, `rd`, `th`) so the timestamp can be parsed reliably. |
+| Filter records with null business keys | Invalid customer references and missing emails reduce downstream data quality. |
+| Store customer metrics in an intermediate model | Allows multiple downstream marts to reuse the same business calculations without duplicating SQL. |
+| Aggregate using `GROUP BY` instead of window functions | The required grain is one row per customer, making aggregate functions the correct choice. |
+| Build separate Fact and Dimension tables | Follows Star Schema design and separates transactional data from descriptive customer information. |
+| Use `LEFT JOIN` while building `dim_customers` | Ensures customers without orders still appear in the final dimension. |
+| Use `COALESCE()` for numeric metrics | Reports should display `0` instead of `NULL` for customers with no orders. |
+| Materialize `dim_customers` as an Incremental Model | Customer profile tables are expected to grow over time. Incremental processing avoids rebuilding the complete table on every run and scales better for large datasets. |
+| Use `customer_id` as `unique_key` | Primary business identifier used for merge operations. |
+| Use `dbt run --full-refresh` after modifying the schema of an Incremental Model | Incremental models merge into existing tables and do not automatically recreate table structures when new columns are introduced. |
+| Introduce `row_hash` | Detect row-level changes efficiently using a deterministic fingerprint. |
+| Add `updated_at` | Support auditing and data freshness tracking. |
+| Add `active_customer` | Expose a commonly used business KPI directly in the mart. |
+| Explicitly configure `incremental_strategy='merge'` | Improves readability and documents the intended merge behavior, even though Snowflake defaults to `merge`. |
+| Configure `on_schema_change='sync_all_columns'` | Allows incremental models to adapt to schema evolution in supported environments. |
+| Do not implement an `is_incremental()` source filter | The source dataset lacks a reliable change timestamp. Filtering source rows could miss valid business metric updates. |
+| Separate business columns from technical metadata using a CTE | Improves readability and avoids duplicating business logic. |
