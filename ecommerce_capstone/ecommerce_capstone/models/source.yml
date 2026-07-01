@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    description: >
+      Raw landing layer for the ecommerce dataset.
+      These tables are populated using dbt seeds for this capstone,
+      simulating externally managed raw source tables.
+
+    schema: RAW
+
+    tables:
+      - name: raw_customers
+        description: Raw customer records before any transformation.
+
+      - name: raw_orders
+        description: Raw order records before cleansing and standardization.

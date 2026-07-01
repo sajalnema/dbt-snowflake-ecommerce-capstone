@@ -453,3 +453,33 @@ dbt automatically creates:
 - `dbt_scd_id`
 
 These columns track when each historical version became active and when it was superseded.
+
+## Sources
+
+dbt Sources represent external datasets that are managed outside of dbt.
+
+Unlike `ref()`, dbt does not create Source tables.
+
+Example
+
+```jinja
+{{ source('raw', 'raw_customers') }}
+```
+
+### ref() vs source()
+
+ref()
+
+- References another dbt model.
+- Creates dependency between dbt models.
+- Used for staging, transform, marts and snapshots.
+
+source()
+
+- References externally managed tables.
+- Used for raw data.
+- Does not build the table.
+
+### Project Implementation
+
+Although this project loads raw tables using `dbt seed`, they are defined as Sources to simulate a production data warehouse where the RAW layer already exists before dbt transformations begin.

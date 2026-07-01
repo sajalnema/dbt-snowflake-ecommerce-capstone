@@ -5,6 +5,6 @@ SELECT
     LOWER(TRIM(email)) AS email,
     CAST(signup_date AS DATE) AS signup_date
 FROM
-    {{ref('raw_customers')}}
+    {{source('raw', 'raw_customers')}}
 WHERE
     email IS NOT NULL

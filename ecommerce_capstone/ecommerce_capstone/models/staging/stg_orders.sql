@@ -18,6 +18,6 @@ SELECT
 
     amount
 FROM
-    {{ref('raw_orders')}}
+    {{source('raw', 'raw_orders')}}
 
 WHERE user_id IS NOT NULL

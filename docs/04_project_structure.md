@@ -184,3 +184,34 @@ dim_customers_snapshot
 Current-state data remains in the mart.
 
 Historical versions are preserved in the snapshot.
+
+
+
+## Source Layer
+
+External Data
+
+↓
+
+raw.raw_customers
+
+raw.raw_orders
+
+↓
+
+Staging
+
+↓
+
+Transform
+
+↓
+
+Mart
+
+↓
+
+Snapshot
+
+The Source layer represents externally managed raw data.
+For reproducibility in this capstone, source tables are populated using dbt seed.

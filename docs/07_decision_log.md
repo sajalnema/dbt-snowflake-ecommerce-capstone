@@ -43,3 +43,8 @@ This document captures the key engineering decisions made throughout the project
 | Use `strategy='check'`                    | Source data does not provide a reliable modification timestamp.                                        |
 | Monitor only `row_hash`                   | Simplifies change detection while automatically covering all business attributes included in the hash. |
 | Snapshot the mart instead of staging      | Historical tracking is required for business-ready customer profiles rather than raw operational data. |
+| Define seed-backed raw tables as dbt Sources | Demonstrates production-style architecture while keeping the project self-contained and reproducible. |
+| Introduced `source.yml`                     | Demonstrate production-style raw data management.                                        |
+| Replaced `ref()` with `source()` in staging | Raw tables are external dependencies, while downstream layers remain dbt-managed models. |
+| Added model and column descriptions         | Improve generated dbt documentation and lineage readability.                             |
+| Updated generic test syntax                 | Align project with dbt 1.11 recommendations and remove deprecation warnings.             |

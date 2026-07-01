@@ -2,30 +2,64 @@ version: 2
 
 models:
   - name: stg_customers
-    description: Cleaned customer dataset.
+    description: >
+      Cleans and standardizes customer records by:
+      - Renaming columns
+      - Normalizing names
+      - Converting emails to lowercase
+      - Casting signup dates
+      - Removing invalid records
 
     columns:
       - name: customer_id
+        description: Unique identifier for each customer.
         tests:
           - unique
           - not_null
 
+      - name: first_name
+        description: Customer first name after normalization.
+
+      - name: last_name
+        description: Customer last name after normalization.
+
       - name: email
+        description: Lowercase customer email address.
         tests:
           - not_null
 
+      - name: signup_date
+        description: Customer signup date.
+
   - name: stg_orders
-    description: Cleaned orders dataset.
+    description: >
+      Cleans and standardizes order records by:
+      - Renaming user_id to customer_id
+      - Parsing textual timestamps
+      - Mapping numeric order status to business labels
+      - Removing orphan orders
 
     columns:
       - name: order_id
+        description: Unique identifier for each order.
         tests:
           - unique
           - not_null
 
       - name: customer_id
+        description: Customer who placed the order.
         tests:
           - not_null
           - relationships:
-              to: ref('stg_customers')
-              field: customer_id
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+
+      - name: order_timestamp
+        description: Parsed order timestamp.
+
+      - name: status
+        description: Business-friendly order status.
+
+      - name: amount
+        description: Monetary value of the order.

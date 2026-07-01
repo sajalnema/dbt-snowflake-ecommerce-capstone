@@ -86,3 +86,7 @@ Removes generated directories such as `target/` and `dbt_packages`, allowing the
 dbt test
 # Create / Update snapshots
 dbt snapshot
+# Generate documentation
+dbt docs generate
+# View documentation
+dbt docs serve
