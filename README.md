@@ -23,39 +23,9 @@ These curated datasets are designed for direct consumption by Business Intellige
 
 # Architecture
 
-```text
-                  CSV Files
-                       │
-                  dbt seed
-                       │
-                       ▼
-                RAW (Snowflake)
-                       │
-             source('raw', ...)
-                       │
-                       ▼
-               STAGING Views
-                       │
-                    ref()
-                       │
-                       ▼
-            TRANSFORM Tables
-                       │
-                    ref()
-                       │
-          ┌────────────┴────────────┐
-          ▼                         ▼
-     FACT_ORDERS             DIM_CUSTOMERS
-                                     │
-                              Incremental Merge
-                                     │
-                                     ▼
-                     DIM_CUSTOMERS_SNAPSHOT
-                                     │
-                                     ▼
-                          BI / Analytics Layer
-```
+The project follows a layered Analytics Engineering architecture where raw data is progressively transformed into business-ready analytical models before being consumed by reporting and BI tools.
 
+![Project Architecture](ecommerce_capstone/images/architecture.png)
 ---
 
 # Technology Stack
@@ -206,6 +176,12 @@ Purpose
 
 Provide business-ready datasets optimized for reporting and analytics.
 
+# Customer Dimension Output
+
+The final dimensional model combines customer information with business metrics such as Customer Lifetime Value (CLV), order counts, and purchase history.
+
+![Customer Dimension](ecommerce_capstone/images/dim_customers.png)
+
 ### dim_customers
 
 Contains
@@ -290,6 +266,12 @@ Snapshot metadata maintained by dbt:
 
 This implements Slowly Changing Dimension (SCD Type 2) behavior.
 
+## Snapshot Output
+
+The snapshot below demonstrates historical tracking of customer records using dbt's SCD Type 2 implementation.
+
+![Snapshot History](ecommerce_capstone/images/snapshot_history.png)
+
 ---
 
 # Data Quality Testing
@@ -364,25 +346,9 @@ ecommerce_capstone/
 
 dbt automatically generates a complete dependency graph using `source()` and `ref()` relationships.
 
-Project Lineage
+The lineage graph below illustrates the complete flow of data from the RAW layer through Staging, Transform, Mart, and Snapshot models.
 
-```
-Sources
-    │
-    ▼
-Staging
-    │
-    ▼
-Transform
-    │
-    ├────────► Fact
-    │
-    ▼
-Dimension
-    │
-    ▼
-Snapshot
-```
+![dbt Lineage](ecommerce_capstone/images/dbt_lineage.png)
 
 The lineage graph provides complete visibility into the transformation pipeline, making it easier to understand model dependencies, debug pipelines, and analyze downstream impact.
 
@@ -413,42 +379,11 @@ This mirrors production architectures where RAW tables are populated by external
 
 # Snowflake Warehouse
 
-Schemas created during the project:
+## Snowflake Warehouse
 
-| Schema | Purpose |
-|---------|---------|
-| RAW | Landing layer |
-| STAGING | Data cleansing |
-| TRANSFORM | Business transformations |
-| MART | Analytics-ready datasets and historical snapshots |
+The following screenshot shows the schemas and warehouse objects created during the project.
 
-Warehouse Objects
-
-### RAW
-
-- raw_customers
-- raw_orders
-
-### STAGING
-
-- stg_customers
-- stg_orders
-
-### TRANSFORM
-
-- int_customer_order_summary
-
-### MART
-
-- dim_customers
-- fact_orders
-- dim_customers_snapshot
-
-> **Screenshot**
-
-```text
-images/snowflake_objects.png
-```
+![Snowflake Warehouse](ecommerce_capstone/images/snowflake_objects.png)
 
 ---
 
@@ -582,6 +517,12 @@ This repository includes detailed engineering notes created throughout the proje
 | 05_interview_notes.md | Interview preparation and project explanation |
 | 06_command_cheatsheet.md | Frequently used dbt commands |
 | 07_decision_log.md | Engineering decisions and implementation rationale |
+
+## Generated dbt Documentation
+
+The project uses **dbt Docs** to automatically generate searchable model documentation, lineage, metadata, and test information.
+
+![dbt Docs](ecommerce_capstone/images/dbt_docs.png)
 
 ---
 

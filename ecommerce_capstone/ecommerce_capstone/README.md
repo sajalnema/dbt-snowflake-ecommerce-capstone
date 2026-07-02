@@ -13,3 +13,9 @@ Try running the following commands:
 - Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
 - Find [dbt events](https://events.getdbt.com) near you
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+
+# dbt Project
+
+This directory contains the dbt implementation for the Ecommerce Customer Analytics Pipeline.
+
+For full project documentation, please refer to the repository's main README.
